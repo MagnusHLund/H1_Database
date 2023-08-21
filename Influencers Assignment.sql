@@ -164,3 +164,9 @@ select influencers.influencerName, sum(collaborations.payment) as payment
 from influencers
 left join collaborations on influencers.influencerID = collaborations.influencerID
 group by influencers.influencerName
+
+/* Opgave 18, doesnt work yet */
+select distinct influencerName from influencers
+LEFT JOIN Collaborations 
+on influencers.influencerID = Collaborations.influencerID 
+where platformID = 1 and platformID = 2; 
