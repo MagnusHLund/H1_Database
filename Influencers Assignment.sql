@@ -131,5 +131,36 @@ group by influencerName
 having count (*) > 0
 
 /* Opgave 13 */
-select brandName from Brands
-left join Collaborations 
+select distinct brandName from Brands
+join Collaborations 
+on Brands.brandID = Collaborations.brandID 
+join influencers 
+on influencers.influencerID = collaborations.influencerID
+where influencers.instagramFollowers > 40000
+
+/* Opgave 14 */
+select app, avg(influencers.age) age from SocialMediaPlatforms
+join Collaborations 
+on SocialMediaPlatforms.platformID = Collaborations.platformID 
+join influencers 
+on influencers.influencerID = collaborations.influencerID
+group by SocialMediaPlatforms.app
+
+/* Opgave 15 */
+select influencerName from Influencers
+left join Collaborations
+on Influencers.influencerID = Collaborations.influencerID
+group by influencerName 
+having count (*) > 1
+
+/* Opgave 16 - Mikkel ser på den til imorgen */
+SELECT DISTINCT s.app
+FROM SocialMediaPlatforms s
+LEFT JOIN Collaborations c ON s.platformID = c.platformID AND c.brandID = 3
+WHERE c.platformID IS NULL;
+
+/* Opgave 17 */
+select influencers.influencerName, sum(collaborations.payment) as payment
+from influencers
+left join collaborations on influencers.influencerID = collaborations.influencerID
+group by influencers.influencerName
